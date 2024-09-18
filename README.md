@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **Online Code Compiler**
 
-## Getting Started
+A web-based online code compiler that supports multiple languages using the [Piston API](https://emkc.org/piston). This app allows users to write code, compile it, and see the results in real time.
 
-First, run the development server:
+## **Features**
+
+- 🖥️ **Multi-language support:** Compile code in various programming languages (Python, JavaScript, etc.).
+- 🧩 **State Management with Zustand:** Efficient state handling across the app.
+- 🖼️ **Dynamic Language Selection:** Switch between languages seamlessly using the custom language selector component.
+- 🔒 **Protected Routes & Security:** Ensures security with custom headers for API requests.
+
+## **Usage**
+
+1. Select a programming language from the dropdown menu.
+2. Write your code in the text editor.
+3. Click **Run** to execute the code.
+4. View the output in the results section.
+
+## **Project Structure**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+.
+├── components/       # UI components (Buttons, Inputs, etc.)
+├── hooks/            # Zustand store hooks for managing global state
+├── actions/          # API call functions (e.g., compile function)
+├── public/           # Static assets
+├── app/              # Next.js app router
+├── constants/        # Language constants and config
+├── lib/              # Config
+├── providers/        # Global state providers for the app
+├── .env.example      # Example of environment variables
+└── README.md         # Project documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## **Key Files and Folders**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **`/components/SelectLanguages.tsx`** - Language selector component.
+- **`/hooks/useLanguageStore.ts`** - Zustand store to handle language selection.
+- **`/actions/compileCode.ts`** - Function to send code to Piston API and receive results.
+- **`/hooks/useCompileResultStore.ts`** - Zustand store to manage the compile result state.
