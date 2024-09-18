@@ -31,10 +31,3 @@ A web-based online code compiler that supports multiple languages using the [Pis
 ├── .env.example      # Example of environment variables
 └── README.md         # Project documentation
 ```
-
-## **Key Files and Folders**
-
-- **`/components/SelectLanguages.tsx`** - Language selector component.
-- **`/hooks/useLanguageStore.ts`** - Zustand store to handle language selection.
-- **`/actions/compileCode.ts`** - Function to send code to Piston API and receive results.
-- **`/hooks/useCompileResultStore.ts`** - Zustand store to manage the compile result state.
