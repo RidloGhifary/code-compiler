@@ -28,7 +28,7 @@ export function RunCode({ is_circle, className }: RunCodeProps) {
         setCompile(result.run);
       }
     } catch (error) {
-      console.error("Error compiling code:", error);
+      console.error("Error compiling code:");
     } finally {
       set_loading(false);
     }

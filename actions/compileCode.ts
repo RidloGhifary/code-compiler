@@ -42,7 +42,6 @@ export async function compile({ userCode, userLang, userInput }: Props) {
     const result = await response.json();
     return result;
   } catch (error) {
-    console.error("Error compiling code:", error);
     return;
   }
 }
