@@ -5,7 +5,6 @@ import OutputTitle from "../OutputTitle";
 
 export default function Output() {
   const { result, is_loading } = useCompileResultStore();
-  console.log("🚀 ~ Output ~ result:", result);
 
   return (
     <div className="h-full w-full">
