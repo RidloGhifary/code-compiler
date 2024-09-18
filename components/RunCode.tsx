@@ -1,6 +1,8 @@
 import { compile } from "@/actions/compileCode";
 import { Button } from "@/components/ui/button";
 import { useCompileResultStore } from "@/hooks/useCompileResult";
+import { useGetUserCode } from "@/hooks/useGetUserCode";
+import { useLanguageStore } from "@/hooks/useLanguage";
 
 interface RunCodeProps {
   is_circle?: boolean;
@@ -8,6 +10,8 @@ interface RunCodeProps {
 }
 
 export function RunCode({ is_circle, className }: RunCodeProps) {
+  const { userCode } = useGetUserCode();
+  const { selectedLanguage } = useLanguageStore();
   const { setCompile, set_loading, is_loading } = useCompileResultStore();
 
   const onClick = async () => {
@@ -15,8 +19,8 @@ export function RunCode({ is_circle, className }: RunCodeProps) {
 
     try {
       const result = await compile({
-        userCode: "print('Hello, world!')",
-        userLang: "python",
+        userCode: userCode,
+        userLang: selectedLanguage.language,
         userInput: "",
       });
 

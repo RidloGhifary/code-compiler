@@ -34,7 +34,7 @@ export default function SelectLanguages() {
           <SelectItem
             value={language.language}
             key={language.language}
-            className="capitalize"
+            className="cursor-pointer capitalize hover:bg-gray-100 hover:text-black/50"
           >
             {language.language}
           </SelectItem>

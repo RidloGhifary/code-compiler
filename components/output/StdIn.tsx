@@ -10,6 +10,8 @@ export default function StdIn() {
       <OutputTitle title="Standard Input" />
       {Boolean(result && result?.stdout) && !is_loading ? (
         <p className="ml-3 text-sm text-gray-400">{result?.stdout}</p>
+      ) : is_loading ? (
+        <p className="ml-3 text-sm text-gray-400">Compiling...</p>
       ) : (
         <Input
           placeholder="(Optional) Input for the program."

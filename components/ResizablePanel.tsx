@@ -12,14 +12,22 @@ import StdIn from "@/components/output/StdIn";
 import Output from "@/components/output/Output";
 import { RunCode } from "@/components/RunCode";
 import { FontSizeStore, useFontSizeStore } from "@/hooks/useFontSize";
+import { useGetUserCode } from "@/hooks/useGetUserCode";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+import CopyButton from "./CopyButton";
+import { useCompileResultStore } from "@/hooks/useCompileResult";
 
 export default function ResizablePanelComponent() {
   const { selectedLanguage } = useLanguageStore() as LanguageStore;
   const { fontSize } = useFontSizeStore() as FontSizeStore;
-  const [userCode, setUserCode] = useState(``);
+  const { setUserCode } = useGetUserCode();
+  const { result } = useCompileResultStore();
   const [userTheme, setUserTheme] = useState("light");
-  const [userInput, setUserInput] = useState("");
-  const [userOutput, setUserOutput] = useState("");
 
   const options = {
     fontSize: fontSize,
@@ -56,7 +64,18 @@ export default function ResizablePanelComponent() {
             </ResizablePanel>
             <ResizableHandle withHandle className="border border-gray-300" />
             <ResizablePanel defaultSize={85} className="p-2">
-              <Output />
+              <ContextMenu>
+                <ContextMenuTrigger>
+                  <Output />
+                </ContextMenuTrigger>
+                <ContextMenuContent className="bg-white text-black">
+                  <ContextMenuItem className="cursor-pointer hover:bg-gray-100 hover:text-black/50">
+                    <CopyButton
+                      text={result && result?.output ? result?.output : ""}
+                    />
+                  </ContextMenuItem>
+                </ContextMenuContent>
+              </ContextMenu>
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>
