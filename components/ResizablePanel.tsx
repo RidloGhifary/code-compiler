@@ -6,7 +6,6 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { useState } from "react";
 import { LanguageStore, useLanguageStore } from "@/hooks/useLanguage";
 import StdIn from "@/components/output/StdIn";
 import Output from "@/components/output/Output";
@@ -27,7 +26,6 @@ export default function ResizablePanelComponent() {
   const { fontSize } = useFontSizeStore() as FontSizeStore;
   const { setUserCode } = useGetUserCode();
   const { result } = useCompileResultStore();
-  const [userTheme, setUserTheme] = useState("light");
 
   const options = {
     fontSize: fontSize,
@@ -45,7 +43,7 @@ export default function ResizablePanelComponent() {
               options={options}
               height="calc(100vh)"
               width="100%"
-              theme={userTheme}
+              theme={"light"}
               language={selectedLanguage.language}
               defaultLanguage="python"
               defaultValue="# Start coding here"
