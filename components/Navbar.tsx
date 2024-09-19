@@ -17,6 +17,7 @@ export default function Navbar() {
           alt={selectedLanguage.language}
           width={25}
           height={25}
+          priority
         />
         <SelectLanguages />
         <FontSize />
