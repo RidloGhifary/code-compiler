@@ -58,7 +58,18 @@ export default function ResizablePanelComponent() {
         <ResizablePanel defaultSize={50}>
           <ResizablePanelGroup direction="vertical">
             <ResizablePanel defaultSize={15} className="p-2">
-              <StdIn />
+              <ContextMenu>
+                <ContextMenuTrigger>
+                  <StdIn />
+                </ContextMenuTrigger>
+                <ContextMenuContent className="bg-white text-black">
+                  <ContextMenuItem className="cursor-pointer hover:bg-gray-100 hover:text-black/50">
+                    <CopyButton
+                      text={result && result?.stdout ? result?.stdout : ""}
+                    />
+                  </ContextMenuItem>
+                </ContextMenuContent>
+              </ContextMenu>
             </ResizablePanel>
             <ResizableHandle withHandle className="border border-gray-300" />
             <ResizablePanel defaultSize={85} className="p-2">

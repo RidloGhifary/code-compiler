@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useCompileResultStore } from "@/hooks/useCompileResult";
 import { useGetUserCode } from "@/hooks/useGetUserCode";
 import { useLanguageStore } from "@/hooks/useLanguage";
+import { useStdIn } from "@/hooks/useStdIn";
+import { useEffect } from "react";
 
 interface RunCodeProps {
   is_circle?: boolean;
@@ -13,6 +15,7 @@ export function RunCode({ is_circle, className }: RunCodeProps) {
   const { userCode } = useGetUserCode();
   const { selectedLanguage } = useLanguageStore();
   const { setCompile, set_loading, is_loading } = useCompileResultStore();
+  const { stdIn } = useStdIn();
 
   const onClick = async () => {
     set_loading(true);
@@ -21,7 +24,7 @@ export function RunCode({ is_circle, className }: RunCodeProps) {
       const result = await compile({
         userCode: userCode,
         userLang: selectedLanguage.language,
-        userInput: "",
+        userInput: stdIn,
       });
 
       if (result) {
@@ -33,6 +36,37 @@ export function RunCode({ is_circle, className }: RunCodeProps) {
       set_loading(false);
     }
   };
+
+  useEffect(() => {
+    const isMac = () => {
+      const navigatorWithUserAgentData = navigator as Navigator & {
+        userAgentData: any;
+      };
+      // Check if `userAgentData` is available
+      if (navigatorWithUserAgentData.userAgentData) {
+        return navigatorWithUserAgentData.userAgentData.platform
+          .toLowerCase()
+          .includes("mac");
+      } else {
+        // Fallback to `userAgent` if `userAgentData` is not supported
+        return navigator.userAgent.toLowerCase().includes("mac");
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const isCtrlOrCmd = isMac() ? event.metaKey : event.ctrlKey;
+      if (isCtrlOrCmd && event.key === "Enter") {
+        onClick(); // Run code on Command + Enter (macOS) or Ctrl + Enter (Windows/Linux)
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [userCode, selectedLanguage, stdIn]);
 
   return (
     <Button

@@ -1,9 +1,13 @@
+"use client";
+
 import OutputTitle from "@/components/OutputTitle";
-import { Input } from "@/components/ui/input";
 import { useCompileResultStore } from "@/hooks/useCompileResult";
+import { Textarea } from "@/components/ui/textarea";
+import { useStdIn } from "@/hooks/useStdIn";
 
 export default function StdIn() {
   const { result, is_loading } = useCompileResultStore();
+  const { setStdIn } = useStdIn();
 
   return (
     <div>
@@ -13,9 +17,10 @@ export default function StdIn() {
       ) : is_loading ? (
         <p className="ml-3 text-sm text-gray-400">Compiling...</p>
       ) : (
-        <Input
+        <Textarea
           placeholder="(Optional) Input for the program."
           className="border-none shadow-none"
+          onChange={(e) => setStdIn(e.target.value)}
         />
       )}
     </div>
