@@ -1,10 +1,10 @@
 # **Online Code Compiler**
 
-A web-based online code compiler that supports multiple languages using the [Piston API](https://emkc.org/piston). This app allows users to write code, compile it, and see the results in real time.
+A web-based online code compiler. This app allows users to write code, compile it, and see the results in real time.
 
 ## **Features**
 
-- 🖥️ **Multi-language support:** Compile code in various programming languages (Python, JavaScript, etc.).
+- 🖥️ **Multi-language support:** Compile code in various programming languages (Python, Java, etc.).
 - 🧩 **State Management with Zustand:** Efficient state handling across the app.
 - 🖼️ **Dynamic Language Selection:** Switch between languages seamlessly using the custom language selector component.
 - 🔒 **Protected Routes & Security:** Ensures security with custom headers for API requests.
