@@ -30,7 +30,7 @@ export function RunCode({ is_circle, className }: RunCodeProps) {
       if (result) {
         setCompile(result.run);
       }
-    } catch (error) {
+    } catch {
       console.error("Error compiling code:");
     } finally {
       set_loading(false);
@@ -40,7 +40,9 @@ export function RunCode({ is_circle, className }: RunCodeProps) {
   useEffect(() => {
     const isMac = () => {
       const navigatorWithUserAgentData = navigator as Navigator & {
-        userAgentData: any;
+        userAgentData: {
+          platform: string;
+        };
       };
       // Check if `userAgentData` is available
       if (navigatorWithUserAgentData.userAgentData) {
